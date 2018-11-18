@@ -1,6 +1,8 @@
 import React from 'react';
 import { useStore } from 'easy-peasy';
-import styled from 'react-emotion'
+import styled from 'react-emotion';
+
+import { fade, pulse } from '../theme/ainmations';
 
 const Wrapper = styled('div')`
   padding: 2em;
@@ -33,6 +35,9 @@ const Server = styled('div')`
   border-radius: 3px;
   background: ${props => props.theme.color.dark};
   text-align: center;
+  transform-origin: 50% 50%;
+  ${props => props.spawning && 'animation: ' + pulse + ' 1s cubic-bezier(0.5, 0.5, 0, 1) infinite;'}
+  ${props => props.destroying && 'animation: ' + pulse + ' 1s cubic-bezier(0.5, 0.5, 0, 1) infinite;'}
 `;
 
 const App = styled('div')`
@@ -44,6 +49,8 @@ const App = styled('div')`
   flex-basis: 0;
   flex-grow: 1;
   background: ${props => props.theme.color.app[props.type]};
+  ${props => props.spawning && 'animation: ' + fade + ' 1s cubic-bezier(0.5, 0.5, 0, 1) infinite;'}
+  ${props => props.destroying && 'animation: ' + fade + ' 1s cubic-bezier(0.5, 0.5, 0, 1) infinite;'}
 `;
 
 const AppTitle = styled('h2')`
@@ -69,15 +76,11 @@ const Canvas = () => {
       </SubTitle>
       <Grid>
           {servers.map(server => (
-            <Server key={server.id}>
-              {server.spawning && <div>spawning...</div>}
-              {server.destroying && <div>destroying...</div>}
+            <Server key={server.id} spawning={server.spawning} destroying={server.destroying}>
               {server.apps.map(app => (
-                <App key={app.id} type={app.type}>
+                <App key={app.id} type={app.type} spawning={app.spawning} destroying={app.destroying}>
                   <AppTitle>{app.type}</AppTitle>
                   <AppLabel>{app.label}</AppLabel>
-                  {app.spawning && <div>spawning...</div>}
-                  {app.destroying && <div>destroying...</div>}
                 </App>
               ))}
             </Server>

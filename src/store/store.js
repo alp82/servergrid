@@ -5,7 +5,7 @@ import { generateId, sleep } from './util';
 // helpers
 
 const INITIAL_CLUSTER_SIZE = 4;
-const ASYNC_RESPONSE_DELAY = () => 500 + Math.random() * 500;
+const ASYNC_RESPONSE_DELAY = () => 400 + Math.random() * 1100;
 
 export const appNames = {
   Hd: 'Hadoop',
@@ -55,7 +55,11 @@ const serverWithLowestLoadSelector = select(
   [runningServersSelector]
 );
 
-const allAppsSelector = select((state) => state.servers.flatMap(server => server.apps));
+const allAppsSelector = select((state) => {
+  return state.servers
+    .flatMap(server => server.apps)
+    .sort((a, b) => a.created - b.created);
+});
 
 const runningAppsSelector = select(
   (state) => state.allApps.filter(app => !app.spawning && !app.destroying),
@@ -64,11 +68,6 @@ const runningAppsSelector = select(
 
 const destroyableAppsSelector = select(
   (state) => state.allApps.filter(app => !app.destroying),
-  [allAppsSelector],
-);
-
-const latestAppsSelector = select(
-  (state) => state.allApps.sort((a, b) => a.created - b.created),
   [allAppsSelector],
 );
 
@@ -86,7 +85,6 @@ export const model = {
   allApps: allAppsSelector,
   runningApps: runningAppsSelector,
   destroyableApps: destroyableAppsSelector,
-  latestApps: latestAppsSelector,
 
   // actions
   
@@ -159,7 +157,7 @@ export const model = {
 
   destroyApp: effect(async (dispatch, { type }, getState) => {
     const state = getState();
-    const latestAppsOfType = state.latestApps.filter(app => app.type === type);
+    const latestAppsOfType = state.destroyableApps.filter(app => app.type === type);
     const app = latestAppsOfType.length > 0 ? latestAppsOfType[0] : null;
 
     if (app) {
