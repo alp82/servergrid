@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAction } from 'easy-peasy';
 import styled from 'react-emotion'
+import { darken } from 'polished';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
 const Box = styled('div')`
@@ -42,11 +43,17 @@ const Buttons = styled('span')`
 `;
 
 const Button = styled('span')`
+  display: inline-flex;
   padding: .35em;
-  // border: 2px solid grey;
+  border: 3px solid #333;
   border-radius: 50%;
   cursor: pointer;  
-  ${props => props.type && 'background: ' + props.theme.color.app[props.type]}
+  ${props => props.type && 'background: ' + props.theme.color.app[props.type]};
+  
+  &:hover {
+    background: ${props => props.type ? darken(0.2, props.theme.color.app[props.type]) : '#444'};
+  }
+
 `;
 
 const AppButton = ({ type, label, ...props }) => {
@@ -54,12 +61,12 @@ const AppButton = ({ type, label, ...props }) => {
   const destroyApp = useAction(dispatch => dispatch.destroyApp);
 
   return (
-    <Box {...props}>
+    <Box {...props} onClick={() => addApp({ type })} type={type}>
       <Indicator type={type} />
       <Label>{label}</Label>
       <Buttons>
-        <Button onClick={() => destroyApp({ type })}><FaMinus /></Button>
-        <Button onClick={() => addApp({ type })} type={type}><FaPlus /></Button>
+        <Button onClick={(e) => { e.stopPropagation(); destroyApp({ type }) }}><FaMinus /></Button>
+        <Button onClick={(e) => { e.stopPropagation(); addApp({ type })} } type={type}><FaPlus /></Button>
       </Buttons>
     </Box>
   );

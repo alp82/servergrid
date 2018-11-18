@@ -1,6 +1,8 @@
 import React from 'react';
 import { useStore } from 'easy-peasy';
 import styled from 'react-emotion';
+import { darken, lighten } from 'polished';
+import TimeAgo from 'react-timeago';
 
 import { fade, pulse } from '../theme/ainmations';
 
@@ -48,7 +50,11 @@ const App = styled('div')`
   width: 100%;
   flex-basis: 0;
   flex-grow: 1;
-  background: ${props => props.theme.color.app[props.type]};
+  background: ;
+  background: linear-gradient(135deg,
+    ${props => lighten(0.1, props.theme.color.app[props.type])} 0%,
+    ${props => darken(0.25, props.theme.color.app[props.type])} 100%
+  );
   ${props => props.spawning && 'animation: ' + fade + ' 1s cubic-bezier(0.5, 0.5, 0, 1) infinite;'}
   ${props => props.destroying && 'animation: ' + fade + ' 1s cubic-bezier(0.5, 0.5, 0, 1) infinite;'}
 `;
@@ -57,6 +63,10 @@ const AppTitle = styled('h2')`
 `;
 
 const AppLabel = styled('div')`
+`;
+
+const AppDate = styled('small')`
+  color: lightgrey;
 `;
 
 const Canvas = () => {
@@ -81,6 +91,7 @@ const Canvas = () => {
                 <App key={app.id} type={app.type} spawning={app.spawning} destroying={app.destroying}>
                   <AppTitle>{app.type}</AppTitle>
                   <AppLabel>{app.label}</AppLabel>
+                  <AppDate><TimeAgo date={app.created} /></AppDate>
                 </App>
               ))}
             </Server>

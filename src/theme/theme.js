@@ -13,8 +13,8 @@ export default {
   },
   canvas: {
     server: {
-      width: 14,
-      height: 10,
+      width: 15,
+      height: 12,
     }
   }
 }
