@@ -9,20 +9,20 @@ UI project to try React 16.7 Alpha Hooks and easy-peasy state management with fu
 ## Libraries
 
 ### Rendering: `react` `react-dom` `prop-types`
-We use React 16.7-alpha2 to enable awesome new features (see below in category `State`).
+React 16.7-alpha2 is used to enable awesome new features (see below in category `State`).
  
 ### Styling: `emotion` `emotion-theming` `react-emotion` `polished`
 CSS-in-JS styling is flexible and flows nicely with React applications.
 
 Emotion in particular is great because it's possible to write 100% CSS syntax without any quirks.
 
-Polished is a nice set of utils to deal with common styling-related taks. We use it for `darken()` and `lighten()` colors here. 
+Polished is a nice set of utils to deal with common styling-related taks. Here it is used for `darken()` and `lighten()` colors. 
 
 ### State: `easy-peasy`
 Easy-Peasy is a Redux library that requires at least React 16.7 because it relies on hooks. These allow writing functional components while having control over the lifecycle of a component.
 
 ### Icons: `react-icons`
-Just a quick way to use icons in your app. We use the ever-great Fontawesome icons here.
+Just a quick way to use icons in your app. Here the ever-great Fontawesome icons are used.
 
 ### Utility: `react-timeago`
 A small utility to display created timestamps as human-readable text.

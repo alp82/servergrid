@@ -91,7 +91,7 @@ const Canvas = () => {
                 <App key={app.id} type={app.type} spawning={app.spawning} destroying={app.destroying}>
                   <AppTitle>{app.type}</AppTitle>
                   <AppLabel>{app.label}</AppLabel>
-                  <AppDate><TimeAgo date={app.created} /></AppDate>
+                  <AppDate>added <TimeAgo date={app.created} /></AppDate>
                 </App>
               ))}
             </Server>
