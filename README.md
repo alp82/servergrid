@@ -3,7 +3,9 @@ UI project to try `react` 16.7 alpha hooks and `easy-peasy` state management wit
 
 ## Getting Started
 * clone this repository
-* run `yarn start` in the root folder of this project
+* `cd` into the root folder of this project
+* run `yarn` to install all dependencies
+* run `yarn start` to start the dev server                      
 * open your browser at http://localhost:3000 
 
 ## Libraries
