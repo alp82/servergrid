@@ -1,5 +1,5 @@
 # servergrid
-UI project to try React 16.7 Alpha Hooks and easy-peasy state management with functional components
+UI project to try `react` 16.7 alpha hooks and `easy-peasy` state management with functional components
 
 ## Getting Started
 * clone this repository
