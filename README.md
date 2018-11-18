@@ -1,3 +1,6 @@
+# servergrid
+UI project to try React 16.7 Alpha Hooks and easy-peasy state management with functional components
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
